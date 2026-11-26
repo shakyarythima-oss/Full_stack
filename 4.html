@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chessboard</title>
+</head>
+<body>
+
+    <h2 style="text-align:center">Chessboard</h2>
+
+    <div id="board"></div>
+
+    <script>
+        let board = document.getElementById("board");
+
+        board.style.display = "grid";
+        board.style.gridTemplateColumns = "repeat(8, 50px)";
+        board.style.width = "400px";
+        board.style.margin = "auto";
+
+        let pieces = [
+            ["♜","♞","♝","♛","♚","♝","♞","♜"],
+            ["♟","♟","♟","♟","♟","♟","♟","♟"],
+            ["","","","","","","",""],
+            ["","","","","","","",""],
+            ["","","","","","","",""],
+            ["","","","","","","",""],
+            ["♙","♙","♙","♙","♙","♙","♙","♙"],
+            ["♖","♘","♗","♕","♔","♗","♘","♖"]
+        ];
+
+        for (let i = 0; i < 8; i++) {
+
+            for (let j = 0; j < 8; j++) {
+
+                let box = document.createElement("div");
+
+                box.style.height = "50px";
+                box.style.width = "50px";
+                box.style.display = "flex";
+                box.style.justifyContent = "center";
+                box.style.alignItems = "center";
+                box.style.fontSize = "30px";
+
+                if ((i + j) % 2 === 0) {
+                    box.style.backgroundColor = "white";
+                } else {
+                    box.style.backgroundColor = "brown";
+                }
+
+                box.innerText = pieces[i][j];
+
+                board.appendChild(box);
+            }
+        }
+    </script>
+
+</body>
+</html>
