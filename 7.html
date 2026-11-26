@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>University Search</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: lightblue;
+            padding: 30px;
+        }
+
+        .university {
+            background: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 10px;
+            background: blue;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Search Universities by Country</h2>
+
+    <input type="text" id="country" placeholder="Enter country name">
+
+    <button onclick="searchUniversity()">Search</button>
+
+    <div id="result"></div>
+
+    <script>
+        async function searchUniversity() {
+
+            let country = document.getElementById("country").value;
+
+            let result = document.getElementById("result");
+
+            result.innerHTML = "Loading...";
+
+            if (country === "") {
+                result.innerHTML = "Please enter country name.";
+                return;
+            }
+
+            try {
+
+                let response = await fetch(
+                    "https://universities.hipolabs.com/search?country=" +
+                    encodeURIComponent(country)
+                );
+
+                let data = await response.json();
+
+                result.innerHTML = "";
+
+                if (data.length === 0) {
+                    result.innerHTML = "No universities found.";
+                    return;
+                }
+
+                data.forEach(function(university) {
+
+                    let div = document.createElement("div");
+
+                    div.className = "university";
+
+                    let name = document.createElement("h3");
+                    name.innerText = university.name;
+
+                    let state = document.createElement("p");
+                    state.innerText = "State: " +
+                        (university["state-province"] || "Not available");
+
+                    let website = document.createElement("a");
+                    website.href = university.web_pages[0];
+                    website.innerText = university.web_pages[0];
+                    website.target = "_blank";
+
+                    div.appendChild(name);
+                    div.appendChild(state);
+                    div.appendChild(website);
+
+                    result.appendChild(div);
+
+                });
+
+            }
+
+            catch (error) {
+
+                result.innerHTML = "Error fetching data.";
+
+            }
+        }
+    </script>
+
+</body>
+</html>
