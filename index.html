@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Management</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: lightblue;
+            padding: 20px;
+        }
+
+        .product {
+            background: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Product List</h2>
+
+    <div id="products"></div>
+
+    <h2>Add New Product</h2>
+
+    <form id="productForm">
+
+        <input type="text" id="name" placeholder="Product Name" required>
+
+        <input type="number" id="price" placeholder="Price" required>
+
+        <input type="number" id="rating" placeholder="Rating" min="0" max="5" step="0.1" required>
+
+        <button type="submit">Add Product</button>
+
+    </form>
+
+    <script>
+
+        async function showProducts() {
+
+            let response = await fetch("/products");
+
+            let data = await response.json();
+
+            let div = document.getElementById("products");
+
+            div.innerHTML = "";
+
+            data.forEach(function(product) {
+
+                div.innerHTML += `
+                    <div class="product">
+                        <h3>${product.name}</h3>
+                        <p>Price: ₹${product.price}</p>
+                        <p>Rating: ${product.rating}</p>
+                        <p>ID: ${product.id}</p>
+                    </div>
+                `;
+
+            });
+        }
+
+        document.getElementById("productForm").addEventListener("submit", async function(e) {
+
+            e.preventDefault();
+
+            let product = {
+                name: document.getElementById("name").value,
+                price: document.getElementById("price").value,
+                rating: document.getElementById("rating").value
+            };
+
+            await fetch("/products", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(product)
+
+            });
+
+            document.getElementById("productForm").reset();
+
+            showProducts();
+
+        });
+
+        showProducts();
+
+    </script>
+
+</body>
+</html>
