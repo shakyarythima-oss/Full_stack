@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do List</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: lightblue;
+            text-align: center;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 7px;
+            margin: 3px;
+            cursor: pointer;
+        }
+
+        li {
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>My To Do List</h2>
+
+        <input type="text" id="task" placeholder="Enter task">
+
+        <button onclick="addTask()">Add</button>
+
+        <ul id="list"></ul>
+
+    </div>
+
+    <script>
+        function addTask() {
+
+            let task = document.getElementById("task").value;
+
+            if (task === "") {
+                alert("Please enter a task");
+                return;
+            }
+
+            let li = document.createElement("li");
+
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+
+            let span = document.createElement("span");
+            span.textContent = task;
+
+            let del = document.createElement("button");
+            del.textContent = "Delete";
+
+            del.onclick = function() {
+                li.remove();
+            };
+
+            let up = document.createElement("button");
+            up.textContent = "Up";
+
+            up.onclick = function() {
+                let prev = li.previousElementSibling;
+                if (prev) {
+                    li.parentNode.insertBefore(li, prev);
+                }
+            };
+
+            let down = document.createElement("button");
+            down.textContent = "Down";
+
+            down.onclick = function() {
+                let next = li.nextElementSibling;
+                if (next) {
+                    li.parentNode.insertBefore(next, li);
+                }
+            };
+
+            li.appendChild(checkbox);
+            li.appendChild(span);
+            li.appendChild(del);
+            li.appendChild(up);
+            li.appendChild(down);
+
+            document.getElementById("list").appendChild(li);
+
+            document.getElementById("task").value = "";
+        }
+    </script>
+
+</body>
+</html>
