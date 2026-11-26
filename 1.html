@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Concentric Circles</title>
+    <style>
+        .outer {
+            height: 60px;
+            width: 60px;
+            background-color: red;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .middle {
+            height: 40px;
+            width: 40px;
+            background-color: yellow;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .inner {
+            height: 20px;
+            width: 20px;
+            background-color: green;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="middle">
+            <div class="inner"></div>
+        </div>
+    </div>
+</body>
+</html>
