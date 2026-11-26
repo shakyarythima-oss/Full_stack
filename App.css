@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+nav {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+}
+
+section {
+    padding: 50px;
+    text-align: center;
+}
+
+#home {
+    background-color: lightblue;
+    padding: 100px 20px;
+}
+
+#home h1 {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+#home p {
+    margin: 15px;
+}
+
+button {
+    background-color: blue;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#about {
+    background-color: white;
+}
+
+#skills ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+#skills li {
+    display: inline-block;
+    background-color: lightblue;
+    padding: 12px;
+    margin: 8px;
+    border-radius: 5px;
+}
+
+#projects {
+    background-color: white;
+}
+
+.project {
+    background-color: lightblue;
+    margin: 20px auto;
+    padding: 20px;
+    width: 60%;
+    border-radius: 10px;
+}
+
+#contact {
+    background-color: lightblue;
+}
+
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .project {
+        width: 100%;
+    }
+}
